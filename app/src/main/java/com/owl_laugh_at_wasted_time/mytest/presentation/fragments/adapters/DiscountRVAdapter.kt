@@ -1,4 +1,4 @@
-package com.owl_laugh_at_wasted_time.mytest.presintation.fragments.adapters
+package com.owl_laugh_at_wasted_time.mytest.presentation.fragments.adapters
 
 import android.content.Context
 import android.view.LayoutInflater

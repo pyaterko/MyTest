@@ -1,8 +1,13 @@
 package com.owl_laugh_at_wasted_time.mytest.domain.entity
 
 data class Order(
-    val foodImage:String="",
-    val orderName:String="",
-    val discription:String="",
-    val price:String=""
-)
+    var id: Int = UNDEFINED_ID,
+    var foodImage:String="",
+    var orderName:String="",
+    var discription:String="",
+    var price:String=""
+){
+    companion object {
+        const val UNDEFINED_ID = 0
+    }
+}

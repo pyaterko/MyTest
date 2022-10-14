@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.owl_laugh_at_wasted_time.mytest.presintation.fragments.MainFragment"
+        android:name="com.owl_laugh_at_wasted_time.mytest.presentation.fragments.MainFragment"
         android:label="fragment_main"
         tools:layout="@layout/fragment_main" />
 </navigation>

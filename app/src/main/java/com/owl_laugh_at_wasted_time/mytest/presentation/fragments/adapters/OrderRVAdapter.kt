@@ -1,4 +1,4 @@
-package com.owl_laugh_at_wasted_time.mytest.presintation.fragments.adapters
+package com.owl_laugh_at_wasted_time.mytest.presentation.fragments.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.owl_laugh_at_wasted_time.mytest.databinding.FoodRowItemBinding
 import com.owl_laugh_at_wasted_time.mytest.domain.entity.Order
 
-class OrderRVAdapter: RecyclerView.Adapter<OrderRVAdapter.OrderViewHolder>() {
+class OrderRVAdapter : RecyclerView.Adapter<OrderRVAdapter.OrderViewHolder>() {
 
 
     var items: List<Order> = listOf(
@@ -19,6 +19,10 @@ class OrderRVAdapter: RecyclerView.Adapter<OrderRVAdapter.OrderViewHolder>() {
         Order(),
         Order(),
     )
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OrderViewHolder {
@@ -28,7 +32,8 @@ class OrderRVAdapter: RecyclerView.Adapter<OrderRVAdapter.OrderViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: OrderViewHolder, position: Int) {
-
+        val item = items[position]
+        holder.bind(item)
 
     }
 
@@ -39,6 +44,12 @@ class OrderRVAdapter: RecyclerView.Adapter<OrderRVAdapter.OrderViewHolder>() {
         val context: Context,
     ) : RecyclerView.ViewHolder(binding.root) {
 
+        fun bind(item: Order) {
+            with(binding) {
+                orderName.text = item.orderName
+                discription.text = item.discription
+            }
+        }
 
     }
 

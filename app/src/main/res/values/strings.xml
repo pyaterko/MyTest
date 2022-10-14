@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">MyTest</string>
+    <string name="pizza">Пицца</string>
+    <string name="discription_default">Ветчина шампиньоны \nувеличеррая порция\nтоматный соус</string>
+    <string name="prise_default">от 345 р</string>
+    <string name="title_default">Ветчина и грибы</string>
+    <string name="city_name">Москва</string>
+    <string name="undefined_error">undefined_error</string>
+    <string name="try_again">try_again</string>
 </resources>

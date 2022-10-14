@@ -1,4 +1,4 @@
-package com.owl_laugh_at_wasted_time.mytest.presintation.base
+package com.owl_laugh_at_wasted_time.mytest.presentation.base
 
 import android.view.LayoutInflater
 import android.view.View
