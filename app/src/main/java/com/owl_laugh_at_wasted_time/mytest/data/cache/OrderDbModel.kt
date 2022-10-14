@@ -7,8 +7,8 @@ import androidx.room.PrimaryKey
 data class OrderDbModel(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
-    val foodImage:String,
-    val orderName:String,
-    val discription:String,
-    val price:String
+    val foodImage: String?,
+    val orderName: String?,
+    val discription: String?,
+    val price: String?
 )

@@ -2,12 +2,13 @@ package com.owl_laugh_at_wasted_time.mytest.presentation.fragments
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.owl_laugh_at_wasted_time.mytest.R
 import com.owl_laugh_at_wasted_time.mytest.databinding.FragmentMainBinding
-import com.owl_laugh_at_wasted_time.mytest.databinding.LoadingStateBinding
+import com.owl_laugh_at_wasted_time.mytest.domain.entity.Order
 import com.owl_laugh_at_wasted_time.mytest.presentation.base.*
 import com.owl_laugh_at_wasted_time.mytest.presentation.fragments.adapters.CategoryRVAdapter
 import com.owl_laugh_at_wasted_time.mytest.presentation.fragments.adapters.DiscountRVAdapter
@@ -16,8 +17,45 @@ import kotlinx.coroutines.launch
 
 class MainFragment : BaseFragment(R.layout.fragment_main) {
 
+    /*
+         так как бесплатное api работает нестабильно создан список
+          для имитации загрузки на случай сбоев
+ */
+
+    private val list: List<Order> = listOf(
+        Order(
+            id = 0,
+            foodImage = "от 345 р",
+            orderName = "Пицца",
+            discription = "Ветчина шампиньоны \nувеличеррая порция\nтоматный соус\nсок"
+        ),
+        Order(
+            id = 0,
+            foodImage = "от 345 р",
+            orderName = "Пицца",
+            discription = "Ветчина шампиньоны \nувеличеррая порция\nтоматный соус\nсок"
+        ),
+        Order(
+            id = 0,
+            foodImage = "от 345 р",
+            orderName = "Пицца",
+            discription = "Ветчина шампиньоны \nувеличеррая порция\nтоматный соус\nсок"
+        ),
+        Order(
+            id = 0,
+            foodImage = "от 345 р",
+            orderName = "Пицца",
+            discription = "Ветчина шампиньоны \nувеличеррая порция\nтоматный соус\nсок"
+        ),
+        Order(
+            id = 0,
+            foodImage = "от 345 р",
+            orderName = "Пицца",
+            discription = "Ветчина шампиньоны \nувеличеррая порция\nтоматный соус\nсок"
+        )
+    )
+
     private val binding by viewBinding(FragmentMainBinding::bind)
-    private val bindingLoading by viewBinding(LoadingStateBinding::bind)
     private val viewModel by viewModels<MainFragmentViewModel> { viewModelFactory }
 
     override fun onAttach(context: Context) {
@@ -32,31 +70,33 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
         val ordefAdapter = OrderRVAdapter()
         val categoryAdapter = CategoryRVAdapter()
 
-        if (getConnectionType(requireContext()) > 0) {
-            viewModel.getData()
-        } else {
-            viewLifecycleOwner.lifecycleScope.launch {
-                ordefAdapter.items = viewModel.getListOrdsers()
-            }
-        }
-
         with(binding) {
             orderRecycler.adapter = ordefAdapter
             recyclerDiscounts.adapter = discountAdapter
             recyclerCategory.adapter = categoryAdapter
         }
 
+        if (isOnline(requireContext())) {
+            getOnLineData()
+        } else {
+            getCache(ordefAdapter)
+        }
+
         viewModel.liveData.observe(viewLifecycleOwner) {
             when (it) {
                 is Loading -> {
-                    bindingLoading.progressBarLoadingState.visibility = View.VISIBLE
+                    ordefAdapter.items = list
                 }
                 is Success -> {
-                    bindingLoading.errorContainerLoadingState.visibility = View.INVISIBLE
-                    bindingLoading.progressBarLoadingState.visibility = View.INVISIBLE
-                    ordefAdapter.items = it.data
+                    if (it.data.size > 0) {
+                        ordefAdapter.items = it.data
+                        Log.d("MainFragment","${it.data.size}")
+                    } else {
+                        getCache(ordefAdapter)
+                    }
                 }
                 is Error -> {
+                    getCache(ordefAdapter)
                 }
             }
         }
@@ -73,6 +113,21 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
         }
 
 
+    }
+
+    private fun getOnLineData() {
+        viewModel.getData()
+    }
+
+    private fun getCache(ordefAdapter: OrderRVAdapter) {
+        viewLifecycleOwner.lifecycleScope.launch {
+            val currentList = viewModel.getListOrdsers()
+            if (currentList.size > 0) {
+                ordefAdapter.items = currentList
+            } else {
+                ordefAdapter.items = list
+            }
+        }
     }
 
 }

@@ -25,4 +25,8 @@ class FoodMapper @Inject constructor() {
     fun mapListDbModelToListEntity(list: List<OrderDbModel>) = list.map {
         mapDbModelToEntity(it)
     }
+
+    fun mapListEntityToListDbModel(list: List<Order>) = list.map {
+       mapEntityToDbModel(it)
+    }
 }

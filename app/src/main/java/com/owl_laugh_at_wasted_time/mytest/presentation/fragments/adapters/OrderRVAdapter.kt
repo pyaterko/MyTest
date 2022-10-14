@@ -9,16 +9,7 @@ import com.owl_laugh_at_wasted_time.mytest.domain.entity.Order
 
 class OrderRVAdapter : RecyclerView.Adapter<OrderRVAdapter.OrderViewHolder>() {
 
-
-    var items: List<Order> = listOf(
-        Order(),
-        Order(),
-        Order(),
-        Order(),
-        Order(),
-        Order(),
-        Order(),
-    )
+    var items: List<Order> = emptyList()
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -46,8 +37,11 @@ class OrderRVAdapter : RecyclerView.Adapter<OrderRVAdapter.OrderViewHolder>() {
 
         fun bind(item: Order) {
             with(binding) {
-                orderName.text = item.orderName
-                discription.text = item.discription
+                if (item.orderName != "") {
+                    orderName.text = item.orderName
+                    discription.text = item.discription
+                    price.text = item.foodImage
+                }
             }
         }
 

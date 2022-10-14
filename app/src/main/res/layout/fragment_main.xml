@@ -24,8 +24,8 @@
         android:id="@+id/iv_vector"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="52dp"
         android:background="@drawable/ic_vector"
         app:layout_constraintStart_toEndOf="@+id/tv_city"
         app:layout_constraintTop_toTopOf="parent"
@@ -88,15 +88,16 @@
             <LinearLayout
                 android:id="@+id/scrollSelected"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
-                android:layout_marginStart="16dp"
-                android:background="#EAEAEA">
+                android:layout_height="50dp"
+                android:background="#F3F5F9"
+           >
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler_category"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="5dp"
                     android:orientation="horizontal"
                     android:overScrollMode="never"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
@@ -109,6 +110,7 @@
             android:id="@+id/scrollView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="#F3F5F9"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -137,8 +139,6 @@
         </androidx.core.widget.NestedScrollView>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
-    <include layout="@layout/loading_state" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

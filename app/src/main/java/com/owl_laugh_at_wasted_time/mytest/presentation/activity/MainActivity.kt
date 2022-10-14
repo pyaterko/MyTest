@@ -1,10 +1,13 @@
 package com.owl_laugh_at_wasted_time.mytest.presentation.activity
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Context
+import android.net.ConnectivityManager
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.owl_laugh_at_wasted_time.mytest.Initializer
-import com.owl_laugh_at_wasted_time.mytest.presentation.base.viewBinding
 import com.owl_laugh_at_wasted_time.mytest.databinding.ActivityMainBinding
+import com.owl_laugh_at_wasted_time.mytest.presentation.base.viewBinding
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -18,4 +21,5 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
     }
+
 }
