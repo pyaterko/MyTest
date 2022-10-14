@@ -1,5 +1,7 @@
 package com.owl_laugh_at_wasted_time.mytest.data
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Transformations
 import com.owl_laugh_at_wasted_time.mytest.data.cache.FoodDao
 import com.owl_laugh_at_wasted_time.mytest.data.cache.FoodMapper
 import com.owl_laugh_at_wasted_time.mytest.data.remote.FoodApiWorker
@@ -14,9 +16,10 @@ class FoodRepositoryImpl @Inject constructor(
     private val foodDao: FoodDao
 ) : FoodRepository {
 
-    override suspend fun getAllData(): List<Order> {
-        val list = foodDao.getAllData()
-        return mapper.mapListDbModelToListEntity(list)
+    override fun getAllData(): LiveData<List<Order>> = Transformations.map(
+        foodDao.getAllData()
+    ) {
+        mapper.mapListDbModelToListEntity(it)
     }
 
     override suspend fun addItem(item: Order) {
@@ -27,7 +30,7 @@ class FoodRepositoryImpl @Inject constructor(
         foodDao.deleteAll()
     }
 
-    override suspend fun getData():FoodData {
+    override suspend fun getData(): FoodData {
         return apiWorker.getData()
     }
 

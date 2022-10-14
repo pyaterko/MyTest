@@ -2,27 +2,23 @@ package com.owl_laugh_at_wasted_time.mytest.presentation.fragments
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import com.owl_laugh_at_wasted_time.mytest.R
 import com.owl_laugh_at_wasted_time.mytest.databinding.FragmentMainBinding
 import com.owl_laugh_at_wasted_time.mytest.domain.entity.Order
-import com.owl_laugh_at_wasted_time.mytest.presentation.base.*
+import com.owl_laugh_at_wasted_time.mytest.presentation.base.BaseFragment
+import com.owl_laugh_at_wasted_time.mytest.presentation.base.viewBinding
 import com.owl_laugh_at_wasted_time.mytest.presentation.fragments.adapters.CategoryRVAdapter
 import com.owl_laugh_at_wasted_time.mytest.presentation.fragments.adapters.DiscountRVAdapter
 import com.owl_laugh_at_wasted_time.mytest.presentation.fragments.adapters.OrderRVAdapter
-import kotlinx.coroutines.launch
 
 class MainFragment : BaseFragment(R.layout.fragment_main) {
-
     /*
-         так как бесплатное api работает нестабильно создан список
-          для имитации загрузки на случай сбоев
- */
-
-    private val list: List<Order> = listOf(
+так как бесплатное api работает нестабильно создан список
+для имитации загрузки на случай сбоев
+*/
+    val listOrder: List<Order> = listOf(
         Order(
             id = 0,
             foodImage = "от 345 р",
@@ -54,7 +50,6 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
             discription = "Ветчина шампиньоны \nувеличеррая порция\nтоматный соус\nсок"
         )
     )
-
     private val binding by viewBinding(FragmentMainBinding::bind)
     private val viewModel by viewModels<MainFragmentViewModel> { viewModelFactory }
 
@@ -78,26 +73,13 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
 
         if (isOnline(requireContext())) {
             getOnLineData()
-        } else {
-            getCache(ordefAdapter)
         }
 
         viewModel.liveData.observe(viewLifecycleOwner) {
-            when (it) {
-                is Loading -> {
-                    ordefAdapter.items = list
-                }
-                is Success -> {
-                    if (it.data.size > 0) {
-                        ordefAdapter.items = it.data
-                        Log.d("MainFragment","${it.data.size}")
-                    } else {
-                        getCache(ordefAdapter)
-                    }
-                }
-                is Error -> {
-                    getCache(ordefAdapter)
-                }
+            if (it.size > 0) {
+                ordefAdapter.items = it
+            } else {
+                ordefAdapter.items = listOrder
             }
         }
 
@@ -111,23 +93,10 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
                 context?.let { context -> viewItem.tvName.setTextColor(context.getColor(R.color.category_default)) }
             }
         }
-
-
     }
 
     private fun getOnLineData() {
         viewModel.getData()
-    }
-
-    private fun getCache(ordefAdapter: OrderRVAdapter) {
-        viewLifecycleOwner.lifecycleScope.launch {
-            val currentList = viewModel.getListOrdsers()
-            if (currentList.size > 0) {
-                ordefAdapter.items = currentList
-            } else {
-                ordefAdapter.items = list
-            }
-        }
     }
 
 }

@@ -3,13 +3,9 @@ package com.owl_laugh_at_wasted_time.mytest.presentation.base
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
-import android.os.Build
-import android.util.Log
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import com.owl_laugh_at_wasted_time.mytest.presentation.activity.MainActivity
 import javax.inject.Inject
-
 
 open class BaseFragment(layout: Int) : Fragment(layout) {
 

@@ -30,7 +30,6 @@ class CategoryRVAdapter : RecyclerView.Adapter<CategoryRVAdapter.CategoryViewHol
         holder.binding.root.setOnClickListener {
             onItemClickListener?.invoke(holder.binding)
         }
-
     }
 
     override fun getItemCount() = items.size
@@ -45,7 +44,6 @@ class CategoryRVAdapter : RecyclerView.Adapter<CategoryRVAdapter.CategoryViewHol
                 tvName.text = item.name
             }
         }
-
     }
 
 }

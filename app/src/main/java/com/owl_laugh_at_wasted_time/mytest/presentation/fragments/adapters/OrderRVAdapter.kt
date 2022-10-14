@@ -15,7 +15,6 @@ class OrderRVAdapter : RecyclerView.Adapter<OrderRVAdapter.OrderViewHolder>() {
             notifyDataSetChanged()
         }
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OrderViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = FoodRowItemBinding.inflate(inflater, parent, false)
@@ -25,7 +24,6 @@ class OrderRVAdapter : RecyclerView.Adapter<OrderRVAdapter.OrderViewHolder>() {
     override fun onBindViewHolder(holder: OrderViewHolder, position: Int) {
         val item = items[position]
         holder.bind(item)
-
     }
 
     override fun getItemCount() = items.size
@@ -44,7 +42,6 @@ class OrderRVAdapter : RecyclerView.Adapter<OrderRVAdapter.OrderViewHolder>() {
                 }
             }
         }
-
     }
 
 }
