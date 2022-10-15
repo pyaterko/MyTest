@@ -3,16 +3,34 @@ package com.owl_laugh_at_wasted_time.mytest.presentation.fragments.adapters
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.owl_laugh_at_wasted_time.mytest.databinding.FoodRowItemBinding
 import com.owl_laugh_at_wasted_time.mytest.domain.entity.Order
+
+class OrderDiffCallBack(
+    private val oldItem: List<Order>,
+    private val newItem: List<Order>
+) : DiffUtil.Callback() {
+    override fun getOldListSize(): Int = oldItem.size
+
+    override fun getNewListSize(): Int = newItem.size
+
+    override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int) =
+        oldItem[oldItemPosition].id == newItem[newItemPosition].id
+
+    override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int) =
+        oldItem[oldItemPosition] == newItem[newItemPosition]
+}
 
 class OrderRVAdapter : RecyclerView.Adapter<OrderRVAdapter.OrderViewHolder>() {
 
     var items: List<Order> = emptyList()
         set(value) {
+            val diffCallBack = OrderDiffCallBack(field, value)
+            val diffResult = DiffUtil.calculateDiff(diffCallBack)
             field = value
-            notifyDataSetChanged()
+            diffResult.dispatchUpdatesTo(this)
         }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OrderViewHolder {

@@ -37,7 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:layout_marginEnd="16dp"
-        android:background="@drawable/ic_qr_code__1__1"
+        android:background="@drawable/ic_qr_code"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="ContentDescription" />
@@ -85,25 +85,18 @@
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
 
-            <LinearLayout
-                android:id="@+id/scrollSelected"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_category"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:background="#F3F5F9"
-           >
+                android:orientation="horizontal"
+                android:overScrollMode="never"
+                android:paddingVertical="8dp"
+                android:paddingStart="16dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/category_item" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recycler_category"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="5dp"
-                    android:orientation="horizontal"
-                    android:overScrollMode="never"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:listitem="@layout/category_item" />
-
-            </LinearLayout>
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.core.widget.NestedScrollView

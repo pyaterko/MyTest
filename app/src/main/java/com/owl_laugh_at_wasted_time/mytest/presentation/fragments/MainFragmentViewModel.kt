@@ -31,7 +31,7 @@ class MainFragmentViewModel @Inject constructor(
             if (list.meals.size > 0) {
                 clearCache()
                 val lO = list.meals
-                lO.take(5)
+                lO.take(7)
                     .forEach {
                         addToCache(
                             Order(

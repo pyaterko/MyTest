@@ -8,7 +8,9 @@ import com.owl_laugh_at_wasted_time.mytest.databinding.DiscountsItemBinding
 import com.owl_laugh_at_wasted_time.mytest.domain.entity.Discount
 
 class DiscountRVAdapter : RecyclerView.Adapter<DiscountRVAdapter.DiscountViewHolder>() {
-
+ /*
+     список заполнен для имитации загрузки в сязи с отсутствием подходящего api
+  */
     var items: List<Discount> = listOf(
         Discount(),
         Discount(),

@@ -6,5 +6,5 @@ import retrofit2.http.GET
 
 interface FoodApi {
     @GET("api/json/v1/1/list.php?i=list")
-    suspend fun getData():FoodData
+    suspend fun getData(): FoodData
 }

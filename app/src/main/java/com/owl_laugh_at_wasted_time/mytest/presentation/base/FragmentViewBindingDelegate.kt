@@ -11,7 +11,9 @@ import androidx.lifecycle.Observer
 import androidx.viewbinding.ViewBinding
 import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.KProperty
-
+/*
+     FragmentViewBindingDelegate зануляет binding при уничтожении фрагмента
+ */
 class FragmentViewBindingDelegate<T : ViewBinding>(
     val fragment: Fragment,
     val viewBindingFactory: (View) -> T
